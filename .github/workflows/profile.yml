@@ -1,0 +1,67 @@
+name: Update profile stats
+
+on:
+  schedule:
+    - cron: "17 4 * * *"     # daily, 04:17 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["scripts/**", "README.md", ".github/workflows/profile.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  loc:
+    name: Lines of code and frameworks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Count authored lines across all repositories
+        env:
+          # Needs `repo` scope to see private repos. A default GITHUB_TOKEN only
+          # sees this repository, so set PROFILE_TOKEN to a PAT to include them.
+          GH_TOKEN: ${{ secrets.PROFILE_TOKEN || github.token }}
+          GH_USER: kaizen-38
+          GH_AUTHORS: kaizen-38|rarya124@asu.edu
+          OUT: loc_stats.json
+        run: python scripts/loc_stats.py --with-frameworks
+
+      - name: Render README
+        env:
+          GH_TOKEN: ${{ secrets.PROFILE_TOKEN || github.token }}
+          GH_USER: kaizen-38
+          STATS: loc_stats.json
+        run: python scripts/render_readme.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md loc_stats.json
+          git diff --staged --quiet || git commit -m "chore: refresh language and framework stats"
+          git push
+
+  waka:
+    name: WakaTime coding time
+    runs-on: ubuntu-latest
+    needs: loc
+    # Remove this guard once WAKATIME_API_KEY exists, or the job will keep skipping.
+    if: ${{ github.event_name != 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: athul/waka-readme@master
+        with:
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          GH_TOKEN: ${{ secrets.PROFILE_TOKEN || github.token }}
+          SHOW_TITLE: "true"
+          TIME_RANGE: all_time
+          LANG_COUNT: 12
+          BLOCKS: ">-"

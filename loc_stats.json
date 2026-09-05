@@ -1,0 +1,167 @@
+{
+  "languages": {
+    "Python": {
+      "added": 24524,
+      "deleted": 166,
+      "first": "2025-09-22",
+      "last": "2026-07-13"
+    },
+    "TypeScript": {
+      "added": 11515,
+      "deleted": 3470,
+      "first": "2026-03-22",
+      "last": "2026-05-20"
+    },
+    "Shell": {
+      "added": 3722,
+      "deleted": 282,
+      "first": "2026-02-10",
+      "last": "2026-07-13"
+    },
+    "JSON": {
+      "added": 1930,
+      "deleted": 5,
+      "first": "2025-11-24",
+      "last": "2026-05-20"
+    },
+    "Markdown": {
+      "added": 1706,
+      "deleted": 79,
+      "first": "2025-09-20",
+      "last": "2026-07-13"
+    },
+    "CSS": {
+      "added": 621,
+      "deleted": 250,
+      "first": "2026-03-22",
+      "last": "2026-04-05"
+    },
+    "YAML": {
+      "added": 293,
+      "deleted": 0,
+      "first": "2026-03-22",
+      "last": "2026-04-01"
+    },
+    "TOML": {
+      "added": 208,
+      "deleted": 0,
+      "first": "2025-12-30",
+      "last": "2026-04-04"
+    },
+    "Makefile": {
+      "added": 104,
+      "deleted": 0,
+      "first": "2026-03-22",
+      "last": "2026-04-01"
+    },
+    "JavaScript": {
+      "added": 54,
+      "deleted": 0,
+      "first": "2025-11-25",
+      "last": "2026-04-04"
+    }
+  },
+  "years": {
+    "2025": 10465,
+    "2026": 34212
+  },
+  "per_repo": {
+    "PrismRx_LavaLamps_InnovationsHacks26": 13608,
+    "AgentClinic": 10340,
+    "INTERCEPT": 8495,
+    "TARS": 4222,
+    "Movie_recommendation": 2955,
+    "CSE-598-tau_bench": 2573,
+    "Devhacks_HackerTrack_LavaLamps_NextStep": 1949,
+    "sglang-verl-hpu": 476,
+    "OurJourney": 58,
+    "SWM_Movie_RecSys_G18": 1
+  },
+  "excluded_bulk_commits": [
+    {
+      "repo": "sglang-verl-hpu",
+      "date": "2026-07-13",
+      "added": 218553
+    }
+  ],
+  "generated": "2026-09-05",
+  "frameworks": {
+    "Pandas": [
+      "Devhacks_HackerTrack_LavaLamps_NextStep",
+      "INTERCEPT",
+      "PrismRx_LavaLamps_InnovationsHacks26",
+      "TARS",
+      "sglang-verl-hpu"
+    ],
+    "NumPy": [
+      "Devhacks_HackerTrack_LavaLamps_NextStep",
+      "INTERCEPT",
+      "PrismRx_LavaLamps_InnovationsHacks26",
+      "TARS",
+      "sglang-verl-hpu"
+    ],
+    "TailwindCSS": [
+      "Devhacks_HackerTrack_LavaLamps_NextStep",
+      "INTERCEPT",
+      "OurJourney",
+      "PrismRx_LavaLamps_InnovationsHacks26"
+    ],
+    "Pydantic": [
+      "Devhacks_HackerTrack_LavaLamps_NextStep",
+      "INTERCEPT",
+      "PrismRx_LavaLamps_InnovationsHacks26",
+      "sglang-verl-hpu"
+    ],
+    "Transformers": [
+      "AgentClinic",
+      "TARS",
+      "sglang-verl-hpu"
+    ],
+    "React": [
+      "Devhacks_HackerTrack_LavaLamps_NextStep",
+      "INTERCEPT",
+      "PrismRx_LavaLamps_InnovationsHacks26"
+    ],
+    "PyTorch": [
+      "INTERCEPT",
+      "TARS",
+      "sglang-verl-hpu"
+    ],
+    "FastAPI": [
+      "INTERCEPT",
+      "PrismRx_LavaLamps_InnovationsHacks26",
+      "sglang-verl-hpu"
+    ],
+    "Vite": [
+      "Devhacks_HackerTrack_LavaLamps_NextStep",
+      "OurJourney"
+    ],
+    "OpenAI SDK": [
+      "AgentClinic",
+      "sglang-verl-hpu"
+    ],
+    "Anthropic SDK": [
+      "AgentClinic",
+      "sglang-verl-hpu"
+    ],
+    "Next.js": [
+      "INTERCEPT",
+      "PrismRx_LavaLamps_InnovationsHacks26"
+    ],
+    "Flask": [
+      "Devhacks_HackerTrack_LavaLamps_NextStep"
+    ],
+    "NetworkX": [
+      "INTERCEPT"
+    ],
+    "SGLang": [
+      "sglang-verl-hpu"
+    ],
+    "Ray": [
+      "sglang-verl-hpu"
+    ],
+    "verl": [
+      "sglang-verl-hpu"
+    ]
+  }
+}
