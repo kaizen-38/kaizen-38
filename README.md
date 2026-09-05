@@ -31,15 +31,15 @@ Each row shows when I first and last wrote that language.
 ```text
 From: Sep 2025 - To: Sep 2026
 
-Total: 45,336 lines authored across 11 repositories
+Total: 45,347 lines authored across 11 repositories
 
-Python       24,853 lines  >>>>>>>>>>>>>>-----------  54.82 %  Sep 2025 -> Sep 2026
-TypeScript   11,515 lines  >>>>>>-------------------  25.40 %  Mar 2026 -> May 2026
+Python       24,853 lines  >>>>>>>>>>>>>>-----------  54.81 %  Sep 2025 -> Sep 2026
+TypeScript   11,515 lines  >>>>>>-------------------  25.39 %  Mar 2026 -> May 2026
 Shell         3,722 lines  >>-----------------------   8.21 %  Feb 2026 -> Jul 2026
-JSON          2,097 lines  >------------------------   4.63 %  Nov 2025 -> Sep 2026
+JSON          2,097 lines  >------------------------   4.62 %  Nov 2025 -> Sep 2026
 Markdown      1,802 lines  >------------------------   3.97 %  Sep 2025 -> Sep 2026
 CSS             621 lines  -------------------------   1.37 %  Mar 2026 -> Apr 2026
-YAML            360 lines  -------------------------   0.79 %  Mar 2026 -> Sep 2026
+YAML            371 lines  -------------------------   0.82 %  Mar 2026 -> Sep 2026
 TOML            208 lines  -------------------------   0.46 %  Dec 2025 -> Apr 2026
 Makefile        104 lines  -------------------------   0.23 %  Mar 2026 -> Apr 2026
 JavaScript       54 lines  -------------------------   0.12 %  Nov 2025 -> Apr 2026
@@ -51,7 +51,7 @@ JavaScript       54 lines  -------------------------   0.12 %  Nov 2025 -> Apr 2
 <!--START:YEARS-->
 ```text
 2025   10,465 lines  ############
-2026   34,871 lines  ########################################
+2026   34,882 lines  ########################################
 ```
 <!--END:YEARS-->
 

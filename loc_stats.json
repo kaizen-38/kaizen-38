@@ -37,8 +37,8 @@
       "last": "2026-04-05"
     },
     "YAML": {
-      "added": 360,
-      "deleted": 0,
+      "added": 371,
+      "deleted": 2,
       "first": "2026-03-22",
       "last": "2026-09-05"
     },
@@ -63,7 +63,7 @@
   },
   "years": {
     "2025": 10465,
-    "2026": 34871
+    "2026": 34882
   },
   "per_repo": {
     "PrismRx_LavaLamps_InnovationsHacks26": 13608,
@@ -73,7 +73,7 @@
     "Movie_recommendation": 2955,
     "CSE-598-tau_bench": 2573,
     "Devhacks_HackerTrack_LavaLamps_NextStep": 1949,
-    "kaizen-38": 659,
+    "kaizen-38": 670,
     "sglang-verl-hpu": 476,
     "OurJourney": 58,
     "SWM_Movie_RecSys_G18": 1
