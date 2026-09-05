@@ -14,6 +14,10 @@ AUTHORS = [a for a in os.environ.get("GH_AUTHORS", "kaizen-38|rarya124@asu.edu")
 # A single commit adding more than this many lines is a vendor/import/restructure,
 # not authored code. sglang-verl-hpu has one such commit worth 226k lines.
 MAX_COMMIT_ADD = int(os.environ.get("MAX_COMMIT_ADD", "20000"))
+# git-hours session heuristic: a gap under SESSION_GAP hours is continuous work;
+# a commit that opens a session is credited SESSION_OPEN hours of prior work.
+SESSION_GAP  = float(os.environ.get("SESSION_GAP", "2"))
+SESSION_OPEN = float(os.environ.get("SESSION_OPEN", "2"))
 
 LANG = {
     ".py":"Python", ".ipynb":"Jupyter", ".ts":"TypeScript", ".tsx":"TypeScript",
@@ -95,14 +99,20 @@ def repos():
 
 
 def scan_repo(repo, tmp):
-    """Return (per-language stats, per-year LOC) for this author's commits only."""
+    """Return (per-language stats, per-year LOC, dropped commits) for his commits only.
+
+    Hours are estimated with the git-hours session heuristic: consecutive commits
+    less than SESSION_GAP apart are one working session and the gap counts as
+    worked time; a commit that opens a session is credited SESSION_OPEN. It is an
+    estimate from commit timestamps, not tracked time -- see the README note.
+    """
     d = os.path.join(tmp, repo["name"])
     clone = subprocess.run(
         ["git", "clone", "--quiet", "--filter=blob:none", "--single-branch", repo["url"], d],
         capture_output=True, text=True)
     if clone.returncode:
         print(f"  ! clone failed: {repo['name']}", file=sys.stderr)
-        return {}, {}
+        return {}, {}, []
 
     args = ["git", "log", "--no-merges", "--numstat", "--format=@@|%H|%aI"]
     for a in AUTHORS:
@@ -113,7 +123,7 @@ def scan_repo(repo, tmp):
     commits, cur = [], None
     for line in log.splitlines():
         if line.startswith("@@|"):
-            cur = {"date": line.split("|")[2][:10], "rows": []}
+            cur = {"ts": line.split("|")[2], "rows": []}
             commits.append(cur)
             continue
         parts = line.split("\t")
@@ -126,21 +136,34 @@ def scan_repo(repo, tmp):
         if lang:
             cur["rows"].append((int(add), int(dele or 0), lang))
 
-    langs, years, skipped = defaultdict(lambda: defaultdict(int)), defaultdict(int), []
+    # git log is newest-first; sessions need chronological order.
+    commits.sort(key=lambda c: c["ts"])
+    prev = None
     for c in commits:
+        t = datetime.fromisoformat(c["ts"])
+        gap = (t - prev).total_seconds() / 3600 if prev else None
+        c["hours"] = gap if (gap is not None and gap < SESSION_GAP) else SESSION_OPEN
+        prev = t
+
+    langs, years, skipped = defaultdict(lambda: defaultdict(float)), defaultdict(int), []
+    for c in commits:
+        date = c["ts"][:10]
         total = sum(r[0] for r in c["rows"])
         if total > MAX_COMMIT_ADD:
-            skipped.append({"repo": repo["name"], "date": c["date"], "added": total})
+            skipped.append({"repo": repo["name"], "date": date, "added": total})
             continue
+        # Split the session time across languages by share of lines touched.
+        touched = sum(r[0] + r[1] for r in c["rows"]) or 1
         for a, dl, lang in c["rows"]:
             st = langs[lang]
             st["added"] += a
             st["deleted"] += dl
-            if not st.get("first") or c["date"] < st["first"]:
-                st["first"] = c["date"]
-            if not st.get("last") or c["date"] > st["last"]:
-                st["last"] = c["date"]
-            years[c["date"][:4]] += a
+            st["hours"] += c["hours"] * ((a + dl) / touched)
+            if not st.get("first") or date < st["first"]:
+                st["first"] = date
+            if not st.get("last") or date > st["last"]:
+                st["last"] = date
+            years[date[:4]] += a
     shutil.rmtree(d, ignore_errors=True)
     return langs, years, skipped
 
@@ -182,7 +205,7 @@ def frameworks(owned):
 
 
 def main():
-    totals, years, dropped, per_repo = (defaultdict(lambda: defaultdict(int)),
+    totals, years, dropped, per_repo = (defaultdict(lambda: defaultdict(float)),
                                         defaultdict(int), [], {})
     private_n = set()
     with tempfile.TemporaryDirectory() as tmp:
@@ -195,13 +218,14 @@ def main():
                 # Private repo names stay out of the committed JSON -- unpublished
                 # research repo names would otherwise leak from a public README.
                 key = r["name"] if not r.get("private") else "__private__"
-                per_repo[key] = per_repo.get(key, 0) + sum(v["added"] for v in langs.values())
+                per_repo[key] = per_repo.get(key, 0) + int(sum(v["added"] for v in langs.values()))
                 if r.get("private"):
                     private_n.add(r["name"])
             for lang, s in langs.items():
                 t = totals[lang]
                 t["added"] += s["added"]
                 t["deleted"] += s["deleted"]
+                t["hours"] += s["hours"]
                 if not t.get("first") or s["first"] < t["first"]:
                     t["first"] = s["first"]
                 if not t.get("last") or s["last"] > t["last"]:
@@ -209,6 +233,9 @@ def main():
             for y, v in ys.items():
                 years[y] += v
     totals = {k: v for k, v in totals.items() if v["added"] > 0}
+    for v in totals.values():
+        v["added"], v["deleted"] = int(v["added"]), int(v["deleted"])
+        v["hours"] = round(v["hours"], 2)
     out = {"languages": {k: dict(v) for k, v in
                          sorted(totals.items(), key=lambda x: -x[1]["added"])},
            "years": dict(sorted(years.items())),
@@ -226,7 +253,7 @@ def main():
             for k, v in sorted(fw.items(), key=lambda x: -len(x[1]))}
     json.dump(out, open(os.environ.get("OUT", "loc_stats.json"), "w"), indent=2)
     for k, v in out["languages"].items():
-        print(f'{k:22} {v["added"]:>8,}  {v["first"]} -> {v["last"]}')
+        print(f'{k:22} {v["added"]:>8,} lines  {v["hours"]:>7.1f} h  {v["first"]} -> {v["last"]}')
     print("\nby repo:", json.dumps(out["per_repo"], indent=2))
     print("dropped bulk commits:", json.dumps(dropped, indent=2))
 

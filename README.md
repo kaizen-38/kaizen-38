@@ -21,31 +21,37 @@
 
 ---
 
-## 📊 Lines of code, by language
+## 📊 Lines of code and hours, by language
 
 Counted from every commit I authored across all of my repositories — additions only,
 excluding vendored trees, lock files, generated output and binary assets.
-Each row shows when I first and last wrote that language.
+
+**Hours are estimated, not tracked.** They come from the commit timestamps: consecutive
+commits less than two hours apart count as one working session, and a commit that opens
+a session is credited two hours of prior work. That is the [`git-hours`](https://github.com/kimmobrunfeldt/git-hours)
+heuristic — it reconstructs time I never instrumented, so treat it as a lower-bound
+shape of where effort went, not a timesheet. The WakaTime block further down is
+real measured time, and only starts from the day I installed it.
 
 <!--START:LOC-->
 ```text
 From: Sep 2025 - To: Sep 2026
 
-Total: 94,169 lines authored across 17 repositories
+Total: 94,334 lines over ~133h across 17 repositories
 
-Python       36,617 lines  >>>>>>>>>>---------------  38.88 %  Sep 2025 -> Sep 2026
-TypeScript   26,052 lines  >>>>>>>------------------  27.67 %  Dec 2025 -> Jun 2026
-JSON         15,664 lines  >>>>---------------------  16.63 %  Dec 2025 -> Sep 2026
-Markdown      6,938 lines  >>-----------------------   7.37 %  Sep 2025 -> Sep 2026
-Shell         4,748 lines  >------------------------   5.04 %  Feb 2026 -> Aug 2026
-CSS           2,159 lines  >------------------------   2.29 %  Dec 2025 -> Jun 2026
-YAML            963 lines  -------------------------   1.02 %  Dec 2025 -> Sep 2026
-Jupyter         459 lines  -------------------------   0.49 %  Jul 2026 -> Jul 2026
-TOML            294 lines  -------------------------   0.31 %  Dec 2025 -> Jul 2026
-Makefile        130 lines  -------------------------   0.14 %  Mar 2026 -> Jul 2026
-JavaScript       97 lines  -------------------------   0.10 %  Dec 2025 -> Apr 2026
-PowerShell       32 lines  -------------------------   0.03 %  Jul 2026 -> Jul 2026
-TeX              16 lines  -------------------------   0.02 %  Jul 2026 -> Jul 2026
+Python       36,649 lines   35h  >>>>>>>>>>---------------  38.85 %  Sep 2025 -> Sep 2026
+TypeScript   26,052 lines   44h  >>>>>>>------------------  27.62 %  Dec 2025 -> Jun 2026
+JSON         15,758 lines  5.0h  >>>>---------------------  16.70 %  Dec 2025 -> Sep 2026
+Markdown      6,960 lines   21h  >>-----------------------   7.38 %  Sep 2025 -> Sep 2026
+Shell         4,748 lines   22h  >------------------------   5.03 %  Feb 2026 -> Aug 2026
+CSS           2,159 lines  1.3h  >------------------------   2.29 %  Dec 2025 -> Jun 2026
+YAML            980 lines  2.2h  -------------------------   1.04 %  Dec 2025 -> Sep 2026
+Jupyter         459 lines  0.2h  -------------------------   0.49 %  Jul 2026 -> Jul 2026
+TOML            294 lines  0.7h  -------------------------   0.31 %  Dec 2025 -> Jul 2026
+Makefile        130 lines  0.1h  -------------------------   0.14 %  Mar 2026 -> Jul 2026
+JavaScript       97 lines  0.3h  -------------------------   0.10 %  Dec 2025 -> Apr 2026
+PowerShell       32 lines  0.0h  -------------------------   0.03 %  Jul 2026 -> Jul 2026
+TeX              16 lines  0.0h  -------------------------   0.02 %  Jul 2026 -> Jul 2026
 ```
 <!--END:LOC-->
 
@@ -54,7 +60,7 @@ TeX              16 lines  -------------------------   0.02 %  Jul 2026 -> Jul 2
 <!--START:YEARS-->
 ```text
 2025   22,690 lines  #############
-2026   71,479 lines  ########################################
+2026   71,644 lines  ########################################
 ```
 <!--END:YEARS-->
 

@@ -1,87 +1,100 @@
 {
   "languages": {
     "Python": {
-      "added": 36617,
-      "deleted": 20353,
+      "added": 36649,
+      "deleted": 20363,
+      "hours": 35.58,
       "first": "2025-09-22",
       "last": "2026-09-05"
     },
     "TypeScript": {
       "added": 26052,
       "deleted": 15987,
+      "hours": 44.28,
       "first": "2025-12-05",
       "last": "2026-06-18"
     },
     "JSON": {
-      "added": 15664,
-      "deleted": 5911565,
+      "added": 15758,
+      "deleted": 5911628,
+      "hours": 5.04,
       "first": "2025-12-05",
       "last": "2026-09-05"
     },
     "Markdown": {
-      "added": 6938,
-      "deleted": 3034,
+      "added": 6960,
+      "deleted": 3053,
+      "hours": 21.32,
       "first": "2025-09-20",
       "last": "2026-09-05"
     },
     "Shell": {
       "added": 4748,
       "deleted": 713,
+      "hours": 22.48,
       "first": "2026-02-10",
       "last": "2026-08-25"
     },
     "CSS": {
       "added": 2159,
       "deleted": 1721,
+      "hours": 1.28,
       "first": "2025-12-05",
       "last": "2026-06-11"
     },
     "YAML": {
-      "added": 963,
+      "added": 980,
       "deleted": 2842,
+      "hours": 2.24,
       "first": "2025-12-19",
       "last": "2026-09-05"
     },
     "Jupyter": {
       "added": 459,
       "deleted": 4729,
+      "hours": 0.25,
       "first": "2026-07-09",
       "last": "2026-07-11"
     },
     "TOML": {
       "added": 294,
       "deleted": 2,
+      "hours": 0.66,
       "first": "2025-12-30",
       "last": "2026-07-09"
     },
     "Makefile": {
       "added": 130,
       "deleted": 0,
+      "hours": 0.06,
       "first": "2026-03-22",
       "last": "2026-07-09"
     },
     "JavaScript": {
       "added": 97,
       "deleted": 39,
+      "hours": 0.26,
       "first": "2025-12-05",
       "last": "2026-04-04"
     },
     "PowerShell": {
       "added": 32,
       "deleted": 0,
+      "hours": 0.01,
       "first": "2026-07-09",
       "last": "2026-07-09"
     },
     "TeX": {
       "added": 16,
       "deleted": 0,
+      "hours": 0.0,
       "first": "2026-07-11",
       "last": "2026-07-11"
     }
   },
   "years": {
     "2025": 22690,
-    "2026": 71479
+    "2026": 71644
   },
   "per_repo": {
     "8 private repositories": 51835,
@@ -91,7 +104,7 @@
     "TARS": 4222,
     "CSE-598-tau_bench": 2573,
     "Devhacks_HackerTrack_LavaLamps_NextStep": 1949,
-    "kaizen-38": 670,
+    "kaizen-38": 835,
     "sglang-verl-hpu": 476,
     "SWM_Movie_RecSys_G18": 1
   },

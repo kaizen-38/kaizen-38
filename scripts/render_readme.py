@@ -24,18 +24,25 @@ def month(d):
     return datetime.strptime(d, "%Y-%m-%d").strftime("%b %Y")
 
 
+def hrs(h):
+    return f"{int(h):,}h" if h >= 10 else f"{h:.1f}h"
+
+
 def loc_block(stats):
     langs = stats["languages"]
     total = sum(v["added"] for v in langs.values())
+    hours = sum(v.get("hours", 0) for v in langs.values())
     span = (min(v["first"] for v in langs.values()), max(v["last"] for v in langs.values()))
     out = [f"From: {month(span[0])} - To: {month(span[1])}", "",
-           f"Total: {total:,} lines authored across "
+           f"Total: {total:,} lines over ~{hrs(hours)} across "
            f"{stats.get('repo_count', len(stats['per_repo']))} repositories", ""]
-    width = max(len(k) for k in langs)
+    w = max(len(k) for k in langs)
+    hw = max(len(hrs(v.get("hours", 0))) for v in langs.values())
     for name, v in langs.items():
         pct = v["added"] / total * 100
         filled = round(pct / 100 * BAR)
-        out.append(f"{name:<{width}}  {v['added']:>7,} lines  "
+        out.append(f"{name:<{w}}  {v['added']:>7,} lines  "
+                   f"{hrs(v.get('hours', 0)):>{hw}}  "
                    f"{'>' * filled}{'-' * (BAR - filled)}  {pct:5.2f} %  "
                    f"{month(v['first'])} -> {month(v['last'])}")
     return "```text\n" + "\n".join(out) + "\n```"
