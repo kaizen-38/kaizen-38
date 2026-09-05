@@ -31,18 +31,21 @@ Each row shows when I first and last wrote that language.
 ```text
 From: Sep 2025 - To: Sep 2026
 
-Total: 45,347 lines authored across 11 repositories
+Total: 94,169 lines authored across 17 repositories
 
-Python       24,853 lines  >>>>>>>>>>>>>>-----------  54.81 %  Sep 2025 -> Sep 2026
-TypeScript   11,515 lines  >>>>>>-------------------  25.39 %  Mar 2026 -> May 2026
-Shell         3,722 lines  >>-----------------------   8.21 %  Feb 2026 -> Jul 2026
-JSON          2,097 lines  >------------------------   4.62 %  Nov 2025 -> Sep 2026
-Markdown      1,802 lines  >------------------------   3.97 %  Sep 2025 -> Sep 2026
-CSS             621 lines  -------------------------   1.37 %  Mar 2026 -> Apr 2026
-YAML            371 lines  -------------------------   0.82 %  Mar 2026 -> Sep 2026
-TOML            208 lines  -------------------------   0.46 %  Dec 2025 -> Apr 2026
-Makefile        104 lines  -------------------------   0.23 %  Mar 2026 -> Apr 2026
-JavaScript       54 lines  -------------------------   0.12 %  Nov 2025 -> Apr 2026
+Python       36,617 lines  >>>>>>>>>>---------------  38.88 %  Sep 2025 -> Sep 2026
+TypeScript   26,052 lines  >>>>>>>------------------  27.67 %  Dec 2025 -> Jun 2026
+JSON         15,664 lines  >>>>---------------------  16.63 %  Dec 2025 -> Sep 2026
+Markdown      6,938 lines  >>-----------------------   7.37 %  Sep 2025 -> Sep 2026
+Shell         4,748 lines  >------------------------   5.04 %  Feb 2026 -> Aug 2026
+CSS           2,159 lines  >------------------------   2.29 %  Dec 2025 -> Jun 2026
+YAML            963 lines  -------------------------   1.02 %  Dec 2025 -> Sep 2026
+Jupyter         459 lines  -------------------------   0.49 %  Jul 2026 -> Jul 2026
+TOML            294 lines  -------------------------   0.31 %  Dec 2025 -> Jul 2026
+Makefile        130 lines  -------------------------   0.14 %  Mar 2026 -> Jul 2026
+JavaScript       97 lines  -------------------------   0.10 %  Dec 2025 -> Apr 2026
+PowerShell       32 lines  -------------------------   0.03 %  Jul 2026 -> Jul 2026
+TeX              16 lines  -------------------------   0.02 %  Jul 2026 -> Jul 2026
 ```
 <!--END:LOC-->
 
@@ -50,8 +53,8 @@ JavaScript       54 lines  -------------------------   0.12 %  Nov 2025 -> Apr 2
 
 <!--START:YEARS-->
 ```text
-2025   10,465 lines  ############
-2026   34,882 lines  ########################################
+2025   22,690 lines  #############
+2026   71,479 lines  ########################################
 ```
 <!--END:YEARS-->
 
@@ -62,10 +65,10 @@ Detected from dependency manifests in the repositories I've written code in.
 <!--START:FRAMEWORKS-->
 | | Detected in my repositories |
 |---|---|
-| **Post-training & ML** | **PyTorch** (3), **Transformers** (3), **verl** (1), **SGLang** (1), **Ray** (1) |
-| **Agents & LLM tooling** | **OpenAI SDK** (2), **Anthropic SDK** (2), **Pydantic** (4) |
-| **Web & product** | **React** (3), **Next.js** (2), **Vite** (2), **TailwindCSS** (4), **FastAPI** (3), **Flask** (1) |
-| **Data & scientific** | **Pandas** (5), **NumPy** (5), **NetworkX** (1) |
+| **Post-training & ML** | **PyTorch** (4), **Transformers** (4), **verl** (1), **SGLang** (1), **Ray** (1), **scikit-learn** (1) |
+| **Agents & LLM tooling** | **LangChain** (1), **OpenAI SDK** (3), **Anthropic SDK** (3), **Pydantic** (5) |
+| **Web & product** | **React** (4), **Next.js** (3), **Vite** (1), **TailwindCSS** (4), **FastAPI** (3), **Flask** (1) |
+| **Data & scientific** | **Pandas** (5), **NumPy** (6), **NetworkX** (1) |
 
 <sub>Number in brackets is how many of my repositories declare it.</sub>
 <!--END:FRAMEWORKS-->
@@ -86,7 +89,7 @@ from the day the editor plugin is installed -- it cannot be backfilled.
   <tr><td>🌟 Total stars</td><td><strong>5</strong></td></tr>
   <tr><td>🍴 Total forks</td><td><strong>2</strong></td></tr>
   <tr><td>📦 Public repositories</td><td><strong>9</strong></td></tr>
-  <tr><td>🔄 Pull requests opened</td><td><strong>7</strong></td></tr>
+  <tr><td>🔄 Pull requests opened</td><td><strong>12</strong></td></tr>
   <tr><td>📝 Issues reported</td><td><strong>0</strong></td></tr>
 </table>
 <!--END:GHSTATS-->

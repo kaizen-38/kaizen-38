@@ -29,7 +29,8 @@ def loc_block(stats):
     total = sum(v["added"] for v in langs.values())
     span = (min(v["first"] for v in langs.values()), max(v["last"] for v in langs.values()))
     out = [f"From: {month(span[0])} - To: {month(span[1])}", "",
-           f"Total: {total:,} lines authored across {len(stats['per_repo'])} repositories", ""]
+           f"Total: {total:,} lines authored across "
+           f"{stats.get('repo_count', len(stats['per_repo']))} repositories", ""]
     width = max(len(k) for k in langs)
     for name, v in langs.items():
         pct = v["added"] / total * 100

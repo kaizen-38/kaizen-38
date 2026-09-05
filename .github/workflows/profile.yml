@@ -32,7 +32,23 @@ jobs:
           OUT: loc_stats.json
         run: python scripts/loc_stats.py --with-frameworks
 
+      # Without PROFILE_TOKEN the run only sees public repos and would silently
+      # replace the full figure with a smaller one. Refuse to regress.
+      - name: Guard against a partial count
+        id: guard
+        run: |
+          new=$(jq -r '.repo_count // (.per_repo|length)' loc_stats.json)
+          old=$(git show HEAD:loc_stats.json 2>/dev/null | jq -r '.repo_count // (.per_repo|length)' || echo 0)
+          echo "scanned $new repositories, previous run saw $old"
+          if [ "$new" -lt "$old" ]; then
+            echo "::warning::Only $new of $old repositories visible - set PROFILE_TOKEN to include private repos. Skipping commit."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Render README
+        if: steps.guard.outputs.ok == 'true'
         env:
           GH_TOKEN: ${{ secrets.PROFILE_TOKEN || github.token }}
           GH_USER: kaizen-38
@@ -40,6 +56,7 @@ jobs:
         run: python scripts/render_readme.py
 
       - name: Commit if changed
+        if: steps.guard.outputs.ok == 'true'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

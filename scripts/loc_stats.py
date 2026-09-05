@@ -73,14 +73,23 @@ def lang_of(path):
 
 
 def repos():
-    out = sh(["gh", "api", f"users/{USER}/repos?per_page=100&type=all",
-              "--jq", ".[] | {name, fork, url: .clone_url, default_branch}"])
+    """Every repo he owns. Uses /user/repos when authenticated so private repos
+    are included; falls back to the public listing otherwise."""
+    out = sh(["gh", "api", "user/repos?per_page=100&affiliation=owner",
+              "--jq", ".[] | {name, fork, url: .clone_url, default_branch, private}"])
+    if not out.strip() or out.lstrip().startswith('{"message"'):
+        out = sh(["gh", "api", f"users/{USER}/repos?per_page=100&type=all",
+                  "--jq", ".[] | {name, fork, url: .clone_url, default_branch, private: false}"])
+    token = os.environ.get("GH_TOKEN") or sh(["gh", "auth", "token"]).strip()
     seen, rs = set(), []
     for line in out.strip().splitlines():
         r = json.loads(line)
         if r["name"] in seen:
             continue
         seen.add(r["name"])
+        if r.get("private") and token:
+            r["url"] = r["url"].replace("https://",
+                                        f"https://x-access-token:{token}@")
         rs.append(r)
     return rs
 
@@ -146,7 +155,7 @@ def frameworks(owned):
     found = defaultdict(set)
     want = ("requirements.txt", "pyproject.toml", "package.json")
     for r in repos():
-        if r["name"] not in owned:
+        if r["name"] not in owned and not r.get("private"):
             continue
         tree = sh(["gh", "api",
                    f"repos/{USER}/{r['name']}/git/trees/{r['default_branch']}?recursive=1",
@@ -175,13 +184,20 @@ def frameworks(owned):
 def main():
     totals, years, dropped, per_repo = (defaultdict(lambda: defaultdict(int)),
                                         defaultdict(int), [], {})
+    private_n = set()
     with tempfile.TemporaryDirectory() as tmp:
         for r in repos():
-            print(f"  scanning {r['name']}{' (fork)' if r['fork'] else ''}", file=sys.stderr)
+            tag = " (fork)" if r["fork"] else (" (private)" if r.get("private") else "")
+            print(f"  scanning {r['name']}{tag}", file=sys.stderr)
             langs, ys, skipped = scan_repo(r, tmp)
             dropped += skipped
             if langs:
-                per_repo[r["name"]] = sum(v["added"] for v in langs.values())
+                # Private repo names stay out of the committed JSON -- unpublished
+                # research repo names would otherwise leak from a public README.
+                key = r["name"] if not r.get("private") else "__private__"
+                per_repo[key] = per_repo.get(key, 0) + sum(v["added"] for v in langs.values())
+                if r.get("private"):
+                    private_n.add(r["name"])
             for lang, s in langs.items():
                 t = totals[lang]
                 t["added"] += s["added"]
@@ -196,13 +212,18 @@ def main():
     out = {"languages": {k: dict(v) for k, v in
                          sorted(totals.items(), key=lambda x: -x[1]["added"])},
            "years": dict(sorted(years.items())),
-           "per_repo": dict(sorted(per_repo.items(), key=lambda x: -x[1])),
+           "per_repo": {(f"{len(private_n)} private repositories" if k == "__private__" else k): v
+                        for k, v in sorted(per_repo.items(), key=lambda x: -x[1])},
+           "repo_count": len(per_repo) - 1 + len(private_n) if "__private__" in per_repo else len(per_repo),
            "excluded_bulk_commits": dropped,
            "generated": datetime.now(timezone.utc).strftime("%Y-%m-%d")}
     if "--with-frameworks" in sys.argv:
-        out["frameworks"] = {k: sorted(v) for k, v in
-                             sorted(frameworks(set(per_repo)).items(),
-                                    key=lambda x: -len(x[1]))}
+        fw = frameworks(set(per_repo) | private_n)
+        # Same redaction as per_repo: counts are public, private names are not.
+        out["frameworks"] = {
+            k: sorted(r for r in v if r not in private_n) +
+               ([f"+{n} private"] if (n := len(v & private_n)) else [])
+            for k, v in sorted(fw.items(), key=lambda x: -len(x[1]))}
     json.dump(out, open(os.environ.get("OUT", "loc_stats.json"), "w"), indent=2)
     for k, v in out["languages"].items():
         print(f'{k:22} {v["added"]:>8,}  {v["first"]} -> {v["last"]}')
