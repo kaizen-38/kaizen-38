@@ -29,18 +29,18 @@ Each row shows when I first and last wrote that language.
 
 <!--START:LOC-->
 ```text
-From: Sep 2025 - To: Jul 2026
+From: Sep 2025 - To: Sep 2026
 
-Total: 44,677 lines authored across 10 repositories
+Total: 45,336 lines authored across 11 repositories
 
-Python       24,524 lines  >>>>>>>>>>>>>>-----------  54.89 %  Sep 2025 -> Jul 2026
-TypeScript   11,515 lines  >>>>>>-------------------  25.77 %  Mar 2026 -> May 2026
-Shell         3,722 lines  >>-----------------------   8.33 %  Feb 2026 -> Jul 2026
-JSON          1,930 lines  >------------------------   4.32 %  Nov 2025 -> May 2026
-Markdown      1,706 lines  >------------------------   3.82 %  Sep 2025 -> Jul 2026
-CSS             621 lines  -------------------------   1.39 %  Mar 2026 -> Apr 2026
-YAML            293 lines  -------------------------   0.66 %  Mar 2026 -> Apr 2026
-TOML            208 lines  -------------------------   0.47 %  Dec 2025 -> Apr 2026
+Python       24,853 lines  >>>>>>>>>>>>>>-----------  54.82 %  Sep 2025 -> Sep 2026
+TypeScript   11,515 lines  >>>>>>-------------------  25.40 %  Mar 2026 -> May 2026
+Shell         3,722 lines  >>-----------------------   8.21 %  Feb 2026 -> Jul 2026
+JSON          2,097 lines  >------------------------   4.63 %  Nov 2025 -> Sep 2026
+Markdown      1,802 lines  >------------------------   3.97 %  Sep 2025 -> Sep 2026
+CSS             621 lines  -------------------------   1.37 %  Mar 2026 -> Apr 2026
+YAML            360 lines  -------------------------   0.79 %  Mar 2026 -> Sep 2026
+TOML            208 lines  -------------------------   0.46 %  Dec 2025 -> Apr 2026
 Makefile        104 lines  -------------------------   0.23 %  Mar 2026 -> Apr 2026
 JavaScript       54 lines  -------------------------   0.12 %  Nov 2025 -> Apr 2026
 ```
@@ -51,7 +51,7 @@ JavaScript       54 lines  -------------------------   0.12 %  Nov 2025 -> Apr 2
 <!--START:YEARS-->
 ```text
 2025   10,465 lines  ############
-2026   34,212 lines  ########################################
+2026   34,871 lines  ########################################
 ```
 <!--END:YEARS-->
 
@@ -85,8 +85,8 @@ from the day the editor plugin is installed -- it cannot be backfilled.
 <table>
   <tr><td>🌟 Total stars</td><td><strong>5</strong></td></tr>
   <tr><td>🍴 Total forks</td><td><strong>2</strong></td></tr>
-  <tr><td>📦 Public repositories</td><td><strong>8</strong></td></tr>
-  <tr><td>🔄 Pull requests opened</td><td><strong>12</strong></td></tr>
+  <tr><td>📦 Public repositories</td><td><strong>9</strong></td></tr>
+  <tr><td>🔄 Pull requests opened</td><td><strong>7</strong></td></tr>
   <tr><td>📝 Issues reported</td><td><strong>0</strong></td></tr>
 </table>
 <!--END:GHSTATS-->

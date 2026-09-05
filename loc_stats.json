@@ -1,10 +1,10 @@
 {
   "languages": {
     "Python": {
-      "added": 24524,
+      "added": 24853,
       "deleted": 166,
       "first": "2025-09-22",
-      "last": "2026-07-13"
+      "last": "2026-09-05"
     },
     "TypeScript": {
       "added": 11515,
@@ -19,16 +19,16 @@
       "last": "2026-07-13"
     },
     "JSON": {
-      "added": 1930,
+      "added": 2097,
       "deleted": 5,
       "first": "2025-11-24",
-      "last": "2026-05-20"
+      "last": "2026-09-05"
     },
     "Markdown": {
-      "added": 1706,
+      "added": 1802,
       "deleted": 79,
       "first": "2025-09-20",
-      "last": "2026-07-13"
+      "last": "2026-09-05"
     },
     "CSS": {
       "added": 621,
@@ -37,10 +37,10 @@
       "last": "2026-04-05"
     },
     "YAML": {
-      "added": 293,
+      "added": 360,
       "deleted": 0,
       "first": "2026-03-22",
-      "last": "2026-04-01"
+      "last": "2026-09-05"
     },
     "TOML": {
       "added": 208,
@@ -63,7 +63,7 @@
   },
   "years": {
     "2025": 10465,
-    "2026": 34212
+    "2026": 34871
   },
   "per_repo": {
     "PrismRx_LavaLamps_InnovationsHacks26": 13608,
@@ -73,6 +73,7 @@
     "Movie_recommendation": 2955,
     "CSE-598-tau_bench": 2573,
     "Devhacks_HackerTrack_LavaLamps_NextStep": 1949,
+    "kaizen-38": 659,
     "sglang-verl-hpu": 476,
     "OurJourney": 58,
     "SWM_Movie_RecSys_G18": 1
