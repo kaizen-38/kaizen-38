@@ -51,13 +51,22 @@ jobs:
     name: WakaTime coding time
     runs-on: ubuntu-latest
     needs: loc
-    # Remove this guard once WAKATIME_API_KEY exists, or the job will keep skipping.
-    if: ${{ github.event_name != 'pull_request' }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
+
+      # The secrets context is not usable in a job-level `if`, so gate on a step
+      # output instead. Without the key this job is a clean no-op, not a failure.
+      - id: gate
+        env:
+          KEY: ${{ secrets.WAKATIME_API_KEY }}
+        run: |
+          if [ -n "$KEY" ]; then echo "have=true" >> "$GITHUB_OUTPUT"
+          else echo "have=false" >> "$GITHUB_OUTPUT"; echo "::notice::WAKATIME_API_KEY not set - skipping"; fi
+
       - uses: athul/waka-readme@master
+        if: steps.gate.outputs.have == 'true'
         with:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
           GH_TOKEN: ${{ secrets.PROFILE_TOKEN || github.token }}
