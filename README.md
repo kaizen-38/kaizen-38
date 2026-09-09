@@ -14,13 +14,6 @@
 
 ---
 
-- 🔬 Graduate researcher in the **Cognition and Intelligence Lab** (advised by Prof. Chitta Baral) — AI safety and alignment for autonomous agents, and new benchmarks for agent reliability.
-- ⚙️ Porting production post-training frameworks (**verl**, **slime**, **MILES**) to **Intel Gaudi 2 HPUs** with ASU Research Computing, so the university supercomputer can run our RL experiments.
-- 🧪 M.S. thesis on **self-improving vision-language agents** — small VLMs trained with RL for strategic decisions in interactive multi-agent settings.
-- 🛠️ Building AI products on AWS at the **AI Cloud Innovation Center**.
-
----
-
 ## 📊 Lines of code and hours, by language
 
 Counted from every commit I authored across all of my repositories — additions only,
